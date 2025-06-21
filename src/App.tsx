@@ -2,12 +2,13 @@ import { useState } from "react";
 // import "./App.css";
 
 import "./index.css"
-
+import Header from "./components/Header"
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
+    <Header></Header>
       <h1 className=" text-amber-300">Cipher </h1>
       <div className="text-amber-300">Cipher</div>
       <div className="card">
