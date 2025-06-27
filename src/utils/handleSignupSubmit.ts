@@ -89,14 +89,30 @@ export default async function handleSignupSubmit(
       body: JSON.stringify({ username, password: hashedPassword }),
       credentials: "include", // important for cookies/session
     });
+
+    const data = await response.json();
+    
     if (response.ok) {
-      // Redirect or update UI on successful signup
-      window.location.href = "/login"; // change as needed
+      // Show success message
+    //   alert(data.message || "User signed up successfully");
+      console.log("Signup successful:", data.user);
+      console.log(
+        "client hash password",
+        hashedPassword
+      )
+      console.log("password", password)
+      
+      // Redirect to login page after successful signup
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 10000);
     } else {
-      const data = await response.json();
-      console.error(data.message || "Signup failed");
+      // Handle error response
+      alert(data.message || "Signup failed");
+      console.error("Signup error:", data);
     }
   } catch (e) {
-    console.error("Network errrrrrrrrror", e);
+    console.error("Network error:", e);
+    alert("Network error. Please check your connection and try again.");
   }
 }
