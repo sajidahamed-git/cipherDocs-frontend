@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App.tsx";
 import LoginPage from "./pages/loginPage.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
+import SignupPage from "./pages/SignupPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,10 +20,14 @@ const router = createBrowserRouter([
     path: "app",
     element: <App />,
   },
+  {
+    path: "/signup",
+    element: <SignupPage />,
+  },
 ]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
+  </StrictMode>,
 );

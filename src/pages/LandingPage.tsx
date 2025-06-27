@@ -124,7 +124,7 @@ export default function LandingPage() {
             className="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-288.75"
           />
         </div>
-        <div className=" main mx-auto max-w-2xl  py-24 lg:py-24 xl:py-48">
+        <div className="main mx-auto max-w-2xl py-24 lg:py-24 xl:py-48">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Announcing our next round of funding.{" "}
@@ -143,21 +143,24 @@ export default function LandingPage() {
               lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="#"
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              <Link
+                to="/signup"
+                className="min-w-32 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs transition-colors duration-150 hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Get started
-              </a>
-              <a href="#" className="text-sm/6 font-semibold text-gray-900">
+                Sign up
+              </Link>
+              <Link
+                to="/about"
+                className="rounded-md border-2 border-indigo-600 px-3.5 py-2 text-sm font-semibold text-gray-900 transition-colors duration-150 hover:bg-indigo-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
                 Learn more <span aria-hidden="true">→</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
         <div
           aria-hidden="true"
-          className="bottomblur absolute inset-x-0 top-[calc(100%-12rem)] lg:top-[calc(100%-42rem)]  -z-10 transform-gpu overflow-hidden blur-3xl"
+          className="bottomblur absolute inset-x-0 top-[calc(100%-12rem)] -z-10 transform-gpu overflow-hidden blur-3xl lg:top-[calc(100%-42rem)]"
         >
           <div
             style={{
