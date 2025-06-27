@@ -7,6 +7,8 @@ import LoginPage from "./pages/loginPage.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
 import SignupPage from "./pages/SignupPage.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
+import EditorPage from "./pages/EditorPage.tsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardPage />,
+  },
+  {
+    path: "/document/:id",
+    element: <EditorPage />,
   },
 ]);
 
