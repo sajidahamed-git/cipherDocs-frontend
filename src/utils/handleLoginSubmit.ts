@@ -1,6 +1,8 @@
 //import username types from types.ts
 import type { Username, Password } from "../types/types";
 import bcrypt from "bcryptjs";
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://cipherapi.sajidahamed.com";
 
 export default async function handleLoginSubmit(
   username: Username,
@@ -10,7 +12,7 @@ export default async function handleLoginSubmit(
   e.preventDefault();
   const hashedpassword = await bcrypt.hash(Password, 10);
   try {
-    const response = await fetch("/login", {
+    const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
