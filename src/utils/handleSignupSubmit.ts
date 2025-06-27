@@ -91,7 +91,7 @@ export default async function handleSignupSubmit(
     });
     if (response.ok) {
       // Redirect or update UI on successful signup
-      window.location.href = "/dashboard"; // change as needed
+      window.location.href = "/login"; // change as needed
     } else {
       const data = await response.json();
       console.error(data.message || "Signup failed");

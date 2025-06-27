@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import handleSignupSubmit  from "../utils/handleSignupSubmit";
+import handleSignupSubmit from "../utils/handleSignupSubmit";
 
 import PasswordTooltip from "../components/PasswordTooltip";
-
 
 export default function SignupPage() {
   const [username, setUsername] = useState("");
@@ -35,7 +34,7 @@ export default function SignupPage() {
           <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2">
             <div className="order-2 rounded-lg bg-white p-8 shadow-md md:order-1">
               <h2 className="mb-6 text-2xl font-bold text-gray-900">
-               Important Information
+                Important Information
               </h2>
               <ul className="space-y-4">
                 <li className="flex items-start">
@@ -52,8 +51,9 @@ export default function SignupPage() {
                     />
                   </svg>
                   <span className="text-gray-700">
-                    Your Password is the secret key that encrypts all of your documents.
-                    if you lose it  there is no way to recover it, so keep it safe!
+                    Your Password is the secret key that encrypts all of your
+                    documents. if you lose it there is no way to recover it, so
+                    keep it safe!
                   </span>
                 </li>
                 <li className="flex items-start">
@@ -70,9 +70,9 @@ export default function SignupPage() {
                     />
                   </svg>
                   <span className="text-gray-700">
-                    Due to the encrypted nature, Even the service adminstrators will not be 
-                    able to recover data in case you forget your username and/or password.
-
+                    Due to the encrypted nature, Even the service adminstrators
+                    will not be able to recover data in case you forget your
+                    username and/or password.
                   </span>
                 </li>
                 <li className="flex items-start">
@@ -96,7 +96,13 @@ export default function SignupPage() {
             </div>
 
             <div className="order-1 rounded-lg bg-white p-8 shadow-md md:order-2">
-              <form className="space-y-4" onSubmit={(e) => handleSignupSubmit(username, password, confirmPassword, e)}>
+              <form
+                className="space-y-4"
+                onSubmit={(e) =>
+                  handleSignupSubmit(username, password, confirmPassword, e)
+                }
+
+              >
                 <div>
                   <label
                     htmlFor="username"
@@ -124,7 +130,6 @@ export default function SignupPage() {
                     className="block text-sm font-medium text-gray-900"
                   >
                     Password
-
                     <PasswordTooltip />
                   </label>
                   <div className="mt-2">
