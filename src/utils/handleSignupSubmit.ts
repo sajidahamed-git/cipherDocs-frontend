@@ -97,6 +97,6 @@ export default async function handleSignupSubmit(
       console.error(data.message || "Signup failed");
     }
   } catch (e) {
-    console.error("Network error", e);
+    console.error("Network errrrrrrrrror", e);
   }
 }

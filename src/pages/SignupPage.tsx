@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import handleSignupSubmit  from "../utils/handleSignupSubmit";
+
+import PasswordTooltip from "../components/PasswordTooltip";
+
+
 export default function SignupPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -120,6 +124,8 @@ export default function SignupPage() {
                     className="block text-sm font-medium text-gray-900"
                   >
                     Password
+
+                    <PasswordTooltip />
                   </label>
                   <div className="mt-2">
                     <input
@@ -141,6 +147,7 @@ export default function SignupPage() {
                     className="block text-sm font-medium text-gray-900"
                   >
                     Confirm Password
+                    <PasswordTooltip />
                   </label>
                   <div className="mt-2">
                     <input
