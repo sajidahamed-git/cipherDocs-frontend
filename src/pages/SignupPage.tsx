@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import handleSignupSubmit  from "../utils/handleSignupSubmit";
 export default function SignupPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -92,7 +92,7 @@ export default function SignupPage() {
             </div>
 
             <div className="order-1 rounded-lg bg-white p-8 shadow-md md:order-2">
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={(e) => handleSignupSubmit(username, password, confirmPassword, e)}>
                 <div>
                   <label
                     htmlFor="username"
@@ -156,7 +156,7 @@ export default function SignupPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <input
                     id="terms"
                     name="terms"
@@ -182,12 +182,12 @@ export default function SignupPage() {
                       Privacy Policy
                     </a>
                   </label>
-                </div>
+                </div> */}
 
                 <div>
                   <button
                     type="submit"
-                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     Create account
                   </button>
