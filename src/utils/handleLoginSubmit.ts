@@ -1,6 +1,5 @@
 //import username types from types.ts
 import type { Username, Password } from "../types/types";
-import bcrypt from "bcryptjs";
 const API_URL =
   import.meta.env.VITE_API_URL || "https://cipherapi.sajidahamed.com";
 
@@ -12,7 +11,6 @@ export default async function handleLoginSubmit(
   e.preventDefault();
   
   // Hash the password for zero-trust architecture
-  const hashedPassword = await bcrypt.hash(Password, 10);
   
   try {
     const response = await fetch(`${API_URL}/login`, {
@@ -20,7 +18,7 @@ export default async function handleLoginSubmit(
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password: hashedPassword }), // Send hashed password
+      body: JSON.stringify({ username, password: Password }), // Send hashed password
       credentials: "include", // important for cookies/session
     });
     
