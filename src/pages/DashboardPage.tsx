@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { PlusIcon } from "@heroicons/react/24/solid";
+
+import { useEffect,useState } from "react";
+
 // import TopBlur from "@/components/TopBlur";
 // import BottomBlur from "@/components/BottomBlur";
 
@@ -23,6 +26,46 @@ const documents = [
 ];
 
 export default function DashboardPage() {
+
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+
+
+
+  useEffect(() => {
+    const checkAuth = async ()=>{
+      try {
+        const response =  await fetch("https://cipherapi.sajidahamed.com/me",
+        {
+          method: "GET",
+          credentials: "include",
+        }
+        );
+        if (!response.ok) {
+          throw new Error("Not authenticated");
+        }
+        const data = await response.json();
+        setUser(data);
+        setLoading(false);
+        console.log(user)
+      } catch (error) {
+        console.error("Authentication check failed:", error);
+        navigate("/login");
+      }
+    }
+    checkAuth();
+  }, [navigate, user]);
+
+  if (loading) return <p className="text-center mt-10">Checking session...</p>;
+
+
+
+
+
+
+
   return (
     <div className="h-screen overflow-y-auto bg-gray-50">
         
