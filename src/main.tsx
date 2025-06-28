@@ -8,6 +8,7 @@ import SignupPage from "./pages/SignupPage.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
 import EditorPage from "./pages/EditorPage.tsx";
 import Temp from "./pages/Temp.tsx"; // Temporary page for testing
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
 const router = createBrowserRouter([
   {
@@ -25,15 +26,35 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardPage />,
+    element: (
+      <ProtectedRoute>
+        <DashboardPage />
+      </ProtectedRoute>
+    ),
   },
   {
-    path: "/document/:id",
+    path: "/dashboard/new",
+    element: (
+      <ProtectedRoute>
+        <EditorPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/dashboard/:id",
     element: <EditorPage />,
   },
   {
-    path:"temp",
-    element:<Temp />
+    path: "/dashboard/:id",
+    element: (
+      <ProtectedRoute>
+        <EditorPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "temp",
+    element: <Temp />,
   },
 ]);
 

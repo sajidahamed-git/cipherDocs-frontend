@@ -1,12 +1,6 @@
-import { Link,useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { PlusIcon } from "@heroicons/react/24/solid";
 
-import { useEffect,useState } from "react";
-const API_URL =
-  import.meta.env.VITE_API_URL || "https://cipherapi.sajidahamed.com";
-
-// import TopBlur from "@/components/TopBlur";
-// import BottomBlur from "@/components/BottomBlur";
 
 // In a real app, you would fetch this data from your API
 const documents = [
@@ -28,50 +22,37 @@ const documents = [
 ];
 
 export default function DashboardPage() {
+  // const navigate = useNavigate();
 
-  const navigate = useNavigate();
-
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   // const [user, setUser] = useState(null);
 
+  // useEffect(() => {
+  //   const checkAuth = async () => {
+  //     try {
+  //       const response = await fetch(`${API_URL}/me`, {
+  //         method: "GET",
+  //         credentials: "include",
+  //       });
+  //       if (!response.ok) {
+  //         throw new Error("Not authenticated");
+  //       }
+  //       const data = await response.json();
+  //       console.log("User data from dashboard", data);
+  //     } catch (error) {
+  //       console.error("Authentication check failed:", error);
+  //       navigate("/login");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   checkAuth();
+  // }, [navigate]);
 
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await fetch(`${API_URL}/me`, {
-          method: "GET",
-          credentials: "include",
-        });
-        if (!response.ok) {
-          throw new Error("Not authenticated");
-        }
-        const data = await response.json();
-        console.log("User data:", data);
-     
-      } catch (error) {
-        console.error("Authentication check failed:", error);
-        navigate("/login");
-      } finally {
-        setLoading(false);
-      }
-    };
-    checkAuth();
-    
-    
-  }, [navigate]);
-
-  if (loading) return <p className="text-center mt-10">Checking session...</p>;
-
-
-
-
-
-
+  // if (loading) return <p className="text-center mt-10">Checking session...</p>;
 
   return (
     <div className="h-screen overflow-y-auto bg-gray-50">
-        
       <div className="container mx-auto p-4 sm:px-6 lg:px-8 max-w-7xl my-8 sm:my-16">
         <div className="mb-8 flex items-center justify-between">
           <h1 className="text-3xl font-bold text-gray-800">My Documents</h1>
