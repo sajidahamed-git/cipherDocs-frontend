@@ -2,6 +2,8 @@ import { Link,useNavigate } from "react-router-dom";
 import { PlusIcon } from "@heroicons/react/24/solid";
 
 import { useEffect,useState } from "react";
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://cipherapi.sajidahamed.com";
 
 // import TopBlur from "@/components/TopBlur";
 // import BottomBlur from "@/components/BottomBlur";
@@ -30,33 +32,34 @@ export default function DashboardPage() {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
 
 
 
   useEffect(() => {
-    const checkAuth = async ()=>{
+    const checkAuth = async () => {
       try {
-        const response =  await fetch("https://cipherapi.sajidahamed.com/me",
-        {
+        const response = await fetch(`${API_URL}/me`, {
           method: "GET",
           credentials: "include",
-        }
-        );
+        });
         if (!response.ok) {
           throw new Error("Not authenticated");
         }
         const data = await response.json();
-        setUser(data);
-        setLoading(false);
-        console.log(user)
+        console.log("User data:", data);
+     
       } catch (error) {
         console.error("Authentication check failed:", error);
         navigate("/login");
+      } finally {
+        setLoading(false);
       }
-    }
+    };
     checkAuth();
-  }, [navigate, user]);
+    
+    
+  }, [navigate]);
 
   if (loading) return <p className="text-center mt-10">Checking session...</p>;
 
