@@ -57,7 +57,7 @@ export default function DashboardPage() {
         <div className="mb-8 flex items-center justify-between">
           <h1 className="text-3xl font-bold text-gray-800">My Documents</h1>
           <Link
-            to="/document/new"
+            to="/dashboard/new"
             className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
           >
             <PlusIcon className="mr-2 h-5 w-5" />
