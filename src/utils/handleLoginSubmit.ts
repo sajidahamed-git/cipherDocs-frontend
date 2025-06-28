@@ -10,27 +10,38 @@ export default async function handleLoginSubmit(
   e: React.FormEvent<HTMLFormElement>
 ) {
   e.preventDefault();
-  const hashedpassword = await bcrypt.hash(Password, 10);
+  
+  // Hash the password for zero-trust architecture
+  const hashedPassword = await bcrypt.hash(Password, 10);
+  
   try {
     const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password: hashedpassword }),
+      body: JSON.stringify({ username, password: hashedPassword }), // Send hashed password
       credentials: "include", // important for cookies/session
     });
+    
+    const data = await response.json();
+    
     if (response.ok) {
-      // Redirect or update UI on successful login
-      window.location.href = "/dashboard"; // change as needed
+      // Show success message
+      alert(data.message || "Login successful");
+      console.log("Login successful:", data.user);
+      
+      // Redirect to dashboard after successful login
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 1000);
     } else {
-      const data = await response.json();
-      console.error(data.message || "Login failed");
+      // Handle error response (401 or other errors)
+      alert(data.error || data.message || "Login failed");
+      console.error("Login error:", data);
     }
   } catch (e) {
-    console.error("Network error", e);
+    console.error("Network error:", e);
+    alert("Network error. Please check your connection and try again.");
   }
-  console.log("Login attempt with username:", username);
-  console.log("Login attempt with password:", Password);
-  console.log("hashedpassword:", hashedpassword);
 }
