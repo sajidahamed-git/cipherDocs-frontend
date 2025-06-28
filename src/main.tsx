@@ -7,6 +7,7 @@ import LandingPage from "./pages/LandingPage.tsx";
 import SignupPage from "./pages/SignupPage.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
 import EditorPage from "./pages/EditorPage.tsx";
+import Temp from "./pages/Temp.tsx"; // Temporary page for testing
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/document/:id",
     element: <EditorPage />,
+  },
+  {
+    path:"temp",
+    element:<Temp />
   },
 ]);
 
