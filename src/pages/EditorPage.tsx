@@ -1,9 +1,12 @@
 import { useParams } from "react-router-dom";
 import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
+import { useRef } from "react";
+import { Editor } from "@tiptap/react";
 
 import { useState } from "react";
 
 export default function EditorPage() {
+  const editorRef = useRef<Editor| null>(null);
   const { id } = useParams();
   // In a real app, you would use the `id` to fetch the document content from your API.
   // If id is 'new', you'd show a blank editor.
@@ -15,6 +18,11 @@ export default function EditorPage() {
   const handleSave = () => {
     // TODO: Connect to API to save title
     console.log("Saving title:", title);
+    if(editorRef.current) {
+      const content = editorRef.current.getJSON();
+      console.log("Saving content:", content);
+      // Here you would typically send the content to your API
+    }
   };
 
   return (
@@ -34,7 +42,7 @@ export default function EditorPage() {
         </button>
       </div>
       <div className="flex-grow overflow-y-auto rounded border bg-white">
-        <SimpleEditor />
+        <SimpleEditor onEditorReady={editor=>editorRef.current = editor} />
       </div>
     </div>
   );
