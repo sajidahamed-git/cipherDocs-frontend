@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs";
 import PasswordValidator from "password-validator";
 const API_URL =
   import.meta.env.VITE_API_URL || "https://cipherapi.sajidahamed.com";
@@ -10,20 +9,9 @@ passwordSchema
   .min(3) // Minimum length 8
   .is()
   .max(20) // Maximum length 100
-  .has()
-  .uppercase() // Must have uppercase letters
-  .has()
   .lowercase() // Must have lowercase letters
-  .has()
-  .digits(1) // Must have at least 1 digit
-  .has()
-  .symbols(1) // Must have at least 1 symbol
-  .has()
-  .not()
-  .spaces() // Should not have spaces
-  .is()
-  .not()
-  .oneOf(["Password123", "Password1!"]); // Blacklist these values
+  
+
 
 type ValidationError = {
   validation: string;
@@ -79,14 +67,14 @@ export default async function handleSignupSubmit(
   }
 
   // Hash the password
-  const hashedPassword = await bcrypt.hash(password, 10);
+  // const hashedPassword = await bcrypt.hash(password, 10);
   try {
     const response = await fetch(`${API_URL}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password: hashedPassword }),
+      body: JSON.stringify({ username, password: password }),
       credentials: "include", // important for cookies/session
     });
 
@@ -96,10 +84,7 @@ export default async function handleSignupSubmit(
       // Show success message
     //   alert(data.message || "User signed up successfully");
       console.log("Signup successful:", data.user);
-      console.log(
-        "client hash password",
-        hashedPassword
-      )
+
       console.log("password", password)
       
       // Redirect to login page after successful signup
