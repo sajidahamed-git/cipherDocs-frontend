@@ -1,6 +1,7 @@
 import { Link} from "react-router-dom";
 import { PlusIcon } from "@heroicons/react/24/solid";
 
+import { useAuth } from "../context/AuthContext";
 
 // In a real app, you would fetch this data from your API
 const documents = [
@@ -22,35 +23,14 @@ const documents = [
 ];
 
 export default function DashboardPage() {
-  // const navigate = useNavigate();
+  const { user, loading } = useAuth();
 
-  // const [loading, setLoading] = useState(true);
-  // const [user, setUser] = useState(null);
-
-  // useEffect(() => {
-  //   const checkAuth = async () => {
-  //     try {
-  //       const response = await fetch(`${API_URL}/me`, {
-  //         method: "GET",
-  //         credentials: "include",
-  //       });
-  //       if (!response.ok) {
-  //         throw new Error("Not authenticated");
-  //       }
-  //       const data = await response.json();
-  //       console.log("User data from dashboard", data);
-  //     } catch (error) {
-  //       console.error("Authentication check failed:", error);
-  //       navigate("/login");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   checkAuth();
-  // }, [navigate]);
-
-  // if (loading) return <p className="text-center mt-10">Checking session...</p>;
-
+  if (loading) {
+    return <div className="h-screen flex items-center justify-center">Loading...</div>;
+  }
+  if (!user) {
+    return <div className="h-screen flex items-center justify-center">You must be logged in to view this page.</div>;
+  }
   return (
     <div className="h-screen overflow-y-auto bg-gray-50">
       <div className="container mx-auto p-4 sm:px-6 lg:px-8 max-w-7xl my-8 sm:my-16">

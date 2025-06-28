@@ -7,3 +7,19 @@ export interface LoginForm {
   username: Username;
   password: Password;
 }
+
+// type for user object returned from authentication
+export interface Document {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string; // ISO date string
+  updatedAt: string; // ISO date string
+  userId: number;
+}
+
+export interface User {
+  id: number;
+  username: string;
+  documents: Document[];
+}
