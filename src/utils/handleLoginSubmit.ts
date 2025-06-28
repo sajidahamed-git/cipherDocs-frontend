@@ -23,7 +23,22 @@ export default async function handleLoginSubmit(
     });
     
     const data = await response.json();
-    
+    if (!response.ok) {
+      // Handle error response
+      console.error("Login failed:", data);
+      alert(data.message || "Login failed. Please try again.");
+      return;
+    }
+    // Handle successful login
+    if(response.ok) {
+      // Redirect or update UI on successful login
+      window.location.href = "/dashboard"; // change as needed
+    }
+    console.log("Login successful:", data);
+
+
+
+    console.log(response.status);
     console.log("Login response:", data);
     console.log('response', response);
   } catch (e) {
