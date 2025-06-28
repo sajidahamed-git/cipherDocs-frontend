@@ -26,20 +26,8 @@ export default async function handleLoginSubmit(
     
     const data = await response.json();
     
-    if (response.ok) {
-      // Show success message
-      alert(data.message || "Login successful");
-      console.log("Login successful:", data.user);
-      
-      // Redirect to dashboard after successful login
-      setTimeout(() => {
-        window.location.href = "/dashboard";
-      }, 1000);
-    } else {
-      // Handle error response (401 or other errors)
-      alert(data.error || data.message || "Login failed");
-      console.error("Login error:", data);
-    }
+    console.log("Login response:", data);
+    console.log('response', response);
   } catch (e) {
     console.error("Network error:", e);
     alert("Network error. Please check your connection and try again.");
