@@ -1,39 +1,68 @@
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { PlusIcon } from "@heroicons/react/24/solid";
 
 import { useAuth } from "../context/AuthContext";
+import { useEffect, useState } from "react";
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+import type { Documents } from "../types/types"; // Adjust the import path as necessary
 
 // In a real app, you would fetch this data from your API
-const documents = [
-  { id: "1", title: "My First Note", lastModified: "2 hours ago" },
-  { id: "2", title: "Project Ideas", lastModified: "Yesterday" },
-  { id: "3", title: "Meeting Minutes", lastModified: "3 days ago" },
-  { id: "4", title: "My First Note", lastModified: "2 hours ago" },
-  { id: "5", title: "Project Ideas", lastModified: "Yesterday" },
-  { id: "6", title: "Meeting Minutes", lastModified: "3 days ago" },
-  { id: "7", title: "My First Note", lastModified: "2 hours ago" },
-  { id: "8", title: "Project Ideas", lastModified: "Yesterday" },
-  { id: "9", title: "Meeting Minutes", lastModified: "3 days ago" },
-  { id: "10", title: "My First Note", lastModified: "2 hours ago" },
-  { id: "11", title: "Project Ideas", lastModified: "Yesterday" },
-  { id: "12", title: "Meeting Minutes", lastModified: "3 days ago" },
-  { id: "13", title: "My First Note", lastModified: "2 hours ago" },
-  { id: "14", title: "Project Ideas", lastModified: "Yesterday" },
-  { id: "15", title: "Meeting Minutes", lastModified: "3 days ago" },
-];
+// const documents = [
+//   { id: "1", title: "My First Note", lastModified: "2 hours ago" },
+//   { id: "2", title: "Project Ideas", lastModified: "Yesterday" },
+//   { id: "3", title: "Meeting Minutes", lastModified: "3 days ago" },
+//   { id: "4", title: "My First Note", lastModified: "2 hours ago" },
+//   { id: "5", title: "Project Ideas", lastModified: "Yesterday" },
+//   { id: "6", title: "Meeting Minutes", lastModified: "3 days ago" },
+//   { id: "7", title: "My First Note", lastModified: "2 hours ago" },
+//   { id: "8", title: "Project Ideas", lastModified: "Yesterday" },
+//   { id: "9", title: "Meeting Minutes", lastModified: "3 days ago" },
+//   { id: "10", title: "My First Note", lastModified: "2 hours ago" },
+//   { id: "11", title: "Project Ideas", lastModified: "Yesterday" },
+//   { id: "12", title: "Meeting Minutes", lastModified: "3 days ago" },
+//   { id: "13", title: "My First Note", lastModified: "2 hours ago" },
+//   { id: "14", title: "Project Ideas", lastModified: "Yesterday" },
+//   { id: "15", title: "Meeting Minutes", lastModified: "3 days ago" },
+// ];
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
 
-  if (loading) {
-    return <div className="h-screen flex items-center justify-center">Loading...</div>;
+  console.log("User:", user);
+  const [documents, setDocuments] = useState<Documents[]>([]);
+  const [docLoading, setDocLoading] = useState(true);
+
+  //fetch documents from API
+  useEffect(() => {
+    if (!loading && user) {
+      fetch(`${API_URL}/documents`, {
+        credentials: "include", // important for session/cookie auth
+      })
+        .then((res) => res.json())
+        .then((data) => setDocuments(data))
+        .finally(() => setDocLoading(false));
+    }
+  }, []);
+
+  if (docLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        Loading...
+      </div>
+    );
   }
   if (!user) {
-    return <div className="h-screen flex items-center justify-center">You must be logged in to view this page.</div>;
+    return (
+      <div className="flex h-screen items-center justify-center">
+        You must be logged in to view this page.
+      </div>
+    );
   }
   return (
     <div className="h-screen overflow-y-auto bg-gray-50">
-      <div className="container mx-auto p-4 sm:px-6 lg:px-8 max-w-7xl my-8 sm:my-16">
+      <div className="container mx-auto my-8 max-w-7xl p-4 sm:my-16 sm:px-6 lg:px-8">
         <div className="mb-8 flex items-center justify-between">
           <h1 className="text-3xl font-bold text-gray-800">My Documents</h1>
           <Link
@@ -48,7 +77,7 @@ export default function DashboardPage() {
           {documents.map((doc) => (
             <Link
               key={doc.id}
-              to={`/document/${doc.id}`}
+              to={`document/${doc.id}`}
               className="flex transform flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-6 text-center shadow-md transition-all duration-200 ease-in-out hover:-translate-y-1 hover:bg-gray-100"
             >
               <svg

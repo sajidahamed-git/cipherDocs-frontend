@@ -23,3 +23,10 @@ export interface User {
   username: string;
   documents: Document[];
 }
+
+export interface Documents {
+  id: number;
+  title: string;
+  lastModified?: string; // or whatever fields your backend returns
+  // add other fields as needed
+};

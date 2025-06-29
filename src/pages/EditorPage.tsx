@@ -25,7 +25,7 @@ export default function EditorPage() {
       const content = editorRef.current.getJSON();
       console.log("Saving content:", content);
 
-      const response = await fetch(`${API_URL}/documents/${id}`, {
+      const response = await fetch(`${API_URL}/document/${id}`, {
         method: "POST",
         credentials: "include", // Include cookies for session management
         headers: {
