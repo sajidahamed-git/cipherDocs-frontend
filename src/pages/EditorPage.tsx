@@ -3,6 +3,8 @@ import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor
 import { useRef } from "react";
 import { Editor } from "@tiptap/react";
 
+import { useEffect } from "react";
+
 import { useState } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -49,6 +51,36 @@ export default function EditorPage() {
       // Here you would typically send the content to your API
     }
   };
+
+  //fetch the document content if id is not 'new'
+  useEffect(() => {
+    if (id && id !== "new") {
+      fetch(`${API_URL}/document/${id}`, {
+        method:"GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // important for session/cookie auth
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Failed to fetch document");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          console.log("Fetched document data:", data);
+          if (editorRef.current) {
+            editorRef.current.commands.setContent(data.content);
+            setTitle(data.title);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching document:", error);
+        });
+    }
+  }, [id]);
+
 
   return (
     <div className="flex h-screen flex-col bg-gray-50 p-8">

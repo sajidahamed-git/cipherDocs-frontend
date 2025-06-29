@@ -77,7 +77,7 @@ export default function DashboardPage() {
           {documents.map((doc) => (
             <Link
               key={doc.id}
-              to={`document/${doc.id}`}
+              to={`${doc.id}`}
               className="flex transform flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-6 text-center shadow-md transition-all duration-200 ease-in-out hover:-translate-y-1 hover:bg-gray-100"
             >
               <svg
