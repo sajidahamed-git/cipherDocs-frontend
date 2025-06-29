@@ -9,7 +9,7 @@ import handleLoginSubmit from "../utils/handleLoginSubmit"; // Assuming you have
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // const handleSubmit = async (e: React.FormEvent) => {
   //   e.preventDefault();
@@ -54,7 +54,11 @@ export default function LoginPage() {
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form
-              onSubmit={(e)=>handleLoginSubmit(username, password,e)}
+              onSubmit={async (e) => {
+                setLoading(true);
+                await handleLoginSubmit(username, password, e);
+                setLoading(false);
+              }}
               className="space-y-6"
             >
               <div>
@@ -104,9 +108,16 @@ export default function LoginPage() {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center items-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  disabled={loading}
                 >
-                  Login
+                  {loading && (
+                    <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                  )}
+                  {loading ? "Logging in..." : "Login"}
                 </button>
               </div>
             </form>

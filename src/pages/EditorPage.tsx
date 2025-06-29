@@ -12,7 +12,7 @@ export default function EditorPage() {
   // If id is 'new', you'd show a blank editor.
 
   const [title, setTitle] = useState(
-    id === "new" ? "Untitled" : `Editing Document ${id}`,
+    id === "new" ? "Untitled Document" : `${id}`,
   );
 
   const handleSave = () => {

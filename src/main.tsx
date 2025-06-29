@@ -34,18 +34,7 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-  {
-    path: "/dashboard/new",
-    element: (
-      <ProtectedRoute>
-        <EditorPage />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/dashboard/:id",
-    element: <EditorPage />,
-  },
+
   {
     path: "/dashboard/:id",
     element: (
