@@ -5,8 +5,10 @@ import { Editor } from "@tiptap/react";
 
 import { useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function EditorPage() {
-  const editorRef = useRef<Editor| null>(null);
+  const editorRef = useRef<Editor | null>(null);
   const { id } = useParams();
   // In a real app, you would use the `id` to fetch the document content from your API.
   // If id is 'new', you'd show a blank editor.
@@ -15,12 +17,35 @@ export default function EditorPage() {
     id === "new" ? "Untitled Document" : `${id}`,
   );
 
-  const handleSave = () => {
+
+  const handleSave =  async () => {
     // TODO: Connect to API to save title
     console.log("Saving title:", title);
-    if(editorRef.current) {
+    if (editorRef.current) {
       const content = editorRef.current.getJSON();
       console.log("Saving content:", content);
+
+      const response = await fetch(`${API_URL}/documents/${id}`, {
+        method: "POST",
+        credentials: "include", // Include cookies for session management
+        headers: {
+          "Content-Type": "application/json",
+
+        },
+        body: JSON.stringify({
+          title,
+          content,
+        }),
+      });
+      if (response.ok) {
+        // const data = await response.json();
+        console.log("Document saved successfully:");
+      }
+      else {
+        const errorData = await response.json();
+        console.error("Error saving document:", errorData);
+      }
+
       // Here you would typically send the content to your API
     }
   };
@@ -42,7 +67,9 @@ export default function EditorPage() {
         </button>
       </div>
       <div className="flex-grow overflow-y-auto rounded border bg-white">
-        <SimpleEditor onEditorReady={editor=>editorRef.current = editor} />
+        <SimpleEditor
+          onEditorReady={(editor) => (editorRef.current = editor)}
+        />
       </div>
     </div>
   );
