@@ -3,6 +3,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
+import UserProfile from "@/components/UserProfile";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -29,6 +30,7 @@ import type { Documents } from "../types/types"; // Adjust the import path as ne
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
+  console.log("dashboard:", user.username);
 
   console.log("User:", user);
   const [documents, setDocuments] = useState<Documents[]>([]);
@@ -62,7 +64,10 @@ export default function DashboardPage() {
   }
   return (
     <div className="h-screen overflow-y-auto bg-gray-50">
-      <div className="container mx-auto my-8 max-w-7xl p-4 sm:my-16 sm:px-6 lg:px-8">
+      <div className="container mx-auto  max-w-7xl p-4 sm:my-0 sm:px-6 lg:px-8">
+        <div className="text-right mb-4">
+          <UserProfile username = {user.username}></UserProfile>
+        </div>
         <div className="mb-8 flex items-center justify-between">
           <h1 className="text-3xl font-bold text-gray-800">My Documents</h1>
           <Link
