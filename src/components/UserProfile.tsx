@@ -36,7 +36,7 @@ export default function UserProfile({ username }: { username: string }) {
         className="focus:outline-none"
         title={username}
       >
-        <span className="cursor-pointer bg-indigo-500 hover:bg-indigo-700 inline-block size-15.5 overflow-hidden rounded-full">
+        <span className="cursor-pointer bg-indigo-500 hover:bg-indigo-700 inline-block size-11 overflow-hidden rounded-full">
           <svg
             className="size-full text-gray-300"
             width="16"
