@@ -36,7 +36,7 @@ export default function UserProfile({ username }: { username: string }) {
         className="focus:outline-none"
         title={username}
       >
-        <span className="inline-block size-15.5 overflow-hidden rounded-full bg-gray-100">
+        <span className="cursor-pointer bg-indigo-500 hover:bg-indigo-700 inline-block size-15.5 overflow-hidden rounded-full">
           <svg
             className="size-full text-gray-300"
             width="16"
@@ -65,12 +65,12 @@ export default function UserProfile({ username }: { username: string }) {
         </span>
       </button>
       {open && (
-        <div className="animate-fade-in absolute right-0 z-10 mt-2 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-          <div className="border-b border-gray-100 px-4 py-2 font-medium text-gray-700">
+        <div className="animate-fade-in absolute right-0 z-10 mt-2 w-48 rounded-md border border-black bg-white py-2 shadow-lg">
+          <div className="border-b border-black px-4 py-2 text-center font-medium text-gray-700">
             {username}
           </div>
           <button
-            className="w-full px-4 py-2 text-left text-red-600 hover:bg-gray-50 focus:outline-none"
+            className="w-full px-4 py-2 text-center  text-red-600 hover:bg-gray-50 focus:outline-none"
             onClick={() => {
               setOpen(false);
               onLogout();
