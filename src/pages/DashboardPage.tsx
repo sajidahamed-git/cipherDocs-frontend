@@ -30,9 +30,8 @@ import type { Documents } from "../types/types"; // Adjust the import path as ne
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
-  console.log("dashboard:", user.username);
+  console.log("dashboard:", user);
 
-  console.log("User:", user);
   const [documents, setDocuments] = useState<Documents[]>([]);
   const [docLoading, setDocLoading] = useState(true);
 

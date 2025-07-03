@@ -14,10 +14,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API_URL}/me`, { credentials: "include" })
-      .then(res => res.ok ? res.json() : null)
-      .then(data => setUser(data))
-      .finally(() => setLoading(false));
+    const fetchUser = async () => {
+      try {
+        const res = await fetch(`${API_URL}/me`, { credentials: "include" });
+        const data = res.ok ? await res.json() : null;
+        setUser(data.user);
+      } catch (err) {
+        console.error("Failed to fetch user:", err);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
   }, []);
 
   return (

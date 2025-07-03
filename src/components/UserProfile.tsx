@@ -2,7 +2,6 @@ export default function UserProfile(
     {username}: { username: string } = { username: "Guest" } 
 ) {
 
-    console.log("Rendering UserProfile with username:", username);
   return (
     <>
       <span className={`inline-block size-15.5 overflow-hidden rounded-full bg-gray-100`}>
