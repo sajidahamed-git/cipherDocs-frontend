@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
+
 export default function Home() {
 
     return (
         <div className="flex items-center">
+          <Link to="/dashboard" className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 495.398 495.398"
@@ -19,6 +22,7 @@ export default function Home() {
               </g>
             </g>
           </svg>
+          </Link>
         </div>
     );
 }
