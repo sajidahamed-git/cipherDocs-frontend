@@ -3,7 +3,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
-import UserProfile from "@/components/UserProfile";
+import Topbar from "@/components/Topbar";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -63,10 +63,8 @@ export default function DashboardPage() {
   }
   return (
     <div className="h-screen overflow-y-auto bg-gray-50">
-      <div className="container mx-auto  max-w-7xl p-4 sm:my-0 sm:px-6 lg:px-8">
-        <div className="text-right mb-4">
-          <UserProfile username = {user.username}></UserProfile>
-        </div>
+      <div className="container mx-auto max-w-7xl p-4 sm:my-0 sm:px-6 lg:px-8">
+        <Topbar username={user.username}></Topbar>
         <div className="mb-8 flex items-center justify-between">
           <h1 className="text-3xl font-bold text-gray-800">My Documents</h1>
           <Link

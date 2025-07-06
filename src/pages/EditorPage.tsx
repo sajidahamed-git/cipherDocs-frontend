@@ -2,6 +2,11 @@ import { useParams } from "react-router-dom";
 import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
 import { useRef } from "react";
 import { Editor } from "@tiptap/react";
+import { useAuth } from "@/context/AuthContext";
+
+// import Topbar from "@/components/Topbar";
+import Home from "@/components/Home";
+import UserProfile from "@/components/UserProfile";
 
 import { useEffect } from "react";
 
@@ -10,6 +15,7 @@ import { useState } from "react";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function EditorPage() {
+  const { user } = useAuth();
   const editorRef = useRef<Editor | null>(null);
   const { id } = useParams();
   // In a real app, you would use the `id` to fetch the document content from your API.
@@ -81,22 +87,30 @@ export default function EditorPage() {
     }
   }, [id]);
 
+if (!user) {
+  return <div>Loading...</div>;
+}
 
   return (
     <div className="flex h-screen flex-col bg-gray-50 p-8">
-      <div className="mb-4 flex items-center gap-6">
-        <input
-          className="rounded border-2 border-black bg-transparent px-3 text-2xl text-gray-800 outline-none focus:border-indigo-500"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          aria-label="Document title"
-        />
-        <button
-          onClick={handleSave}
-          className="ml-2 rounded border border-indigo-600 bg-indigo-600 px-4 py-1 font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
-        >
-          Save
-        </button>
+
+      <div className="mb-4 flex items-center justify-between gap-6">
+        <div className="left flex gap-4 items-center">
+          <Home></Home>
+          <input
+            className="rounded border-2 border-black bg-transparent px-3 text-2xl text-gray-800 outline-none focus:border-indigo-500"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            aria-label="Document title"
+          />
+          <button
+            onClick={handleSave}
+            className=" rounded border border-indigo-600 bg-indigo-600 px-4 py-1 font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+          >
+            Save
+          </button>
+        </div>
+        <UserProfile username={user.username} />
       </div>
       <div className="flex-grow overflow-y-auto rounded border bg-white">
         <SimpleEditor
