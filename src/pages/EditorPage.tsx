@@ -1,16 +1,11 @@
 import { useParams } from "react-router-dom";
 import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
-import { useRef } from "react";
 import { Editor } from "@tiptap/react";
 import { useAuth } from "@/context/AuthContext";
-
-// import Topbar from "@/components/Topbar";
 import Home from "@/components/Home";
 import UserProfile from "@/components/UserProfile";
 
-import { useEffect } from "react";
-
-import { useState } from "react";
+import { useEffect,useState,useRef } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
