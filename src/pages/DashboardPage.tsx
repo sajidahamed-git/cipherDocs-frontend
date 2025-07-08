@@ -30,7 +30,6 @@ import type { Documents } from "../types/types"; // Adjust the import path as ne
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
-  console.log("dashboard:", user);
 
   const [documents, setDocuments] = useState<Documents[]>([]);
   const [docLoading, setDocLoading] = useState(true);
@@ -38,14 +37,20 @@ export default function DashboardPage() {
   //fetch documents from API
   useEffect(() => {
     if (!loading && user) {
+      console.log("Fetching documents for user:")
       fetch(`${API_URL}/documents`, {
         credentials: "include", // important for session/cookie auth
       })
         .then((res) => res.json())
         .then((data) => setDocuments(data))
-        .finally(() => setDocLoading(false));
+        .finally(() =>{
+          setDocLoading(false)
+          console.log("setdocs loading to false")
+
+
+        } )
     }
-  }, []);
+  }, [loading,user]);
 
   if (docLoading) {
     return (
