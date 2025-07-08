@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function UserProfile({ username }: { username: string }) {
   const [open, setOpen] = useState(false);
@@ -23,8 +24,26 @@ export default function UserProfile({ username }: { username: string }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [open]);
-  function onLogout() {
+  async function onLogout() {
     console.log("Logging out...");
+    const response  = await fetch(`${API_URL}/logout`, {
+      method: "POST",
+      credentials: "include", // Include cookies for session management
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if(response.ok) {
+      // Optionally, redirect to login page or show a success message
+      window.location.href = "/login"; // Redirect to login page
+    }
+    else {
+      console.error("Logout failed:", response.statusText);
+      // Handle error, e.g., show an error message
+    }
+
+
+    
   }
   return (
     <div className={`relative inline-block`} ref={dropdownRef}>
