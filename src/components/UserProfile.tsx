@@ -26,24 +26,20 @@ export default function UserProfile({ username }: { username: string }) {
   }, [open]);
   async function onLogout() {
     console.log("Logging out...");
-    const response  = await fetch(`${API_URL}/logout`, {
+    const response = await fetch(`${API_URL}/logout`, {
       method: "POST",
       credentials: "include", // Include cookies for session management
       headers: {
         "Content-Type": "application/json",
       },
     });
-    if(response.ok) {
+    if (response.ok) {
       // Optionally, redirect to login page or show a success message
       window.location.href = "/login"; // Redirect to login page
-    }
-    else {
+    } else {
       console.error("Logout failed:", response.statusText);
       // Handle error, e.g., show an error message
     }
-
-
-    
   }
   return (
     <div className={`relative inline-block`} ref={dropdownRef}>
@@ -55,7 +51,7 @@ export default function UserProfile({ username }: { username: string }) {
         className="focus:outline-none"
         title={username}
       >
-        <span className="cursor-pointer bg-indigo-500 hover:bg-indigo-700 inline-block size-11 overflow-hidden rounded-full">
+        <span className="inline-block size-11 cursor-pointer overflow-hidden rounded-full bg-indigo-500 hover:bg-indigo-700">
           <svg
             className="size-full text-gray-300"
             width="16"
@@ -85,11 +81,11 @@ export default function UserProfile({ username }: { username: string }) {
       </button>
       {open && (
         <div className="animate-fade-in absolute right-0 z-10 mt-2 w-48 rounded-md border border-black bg-white py-2 shadow-lg">
-          <div className="border-b border-black px-4 py-2 text-center font-medium text-gray-700">
+          <div className="cursor-pointer border-b border-black px-4 py-2 text-center font-medium text-gray-700 hover:bg-blue-100">
             {username}
           </div>
           <button
-            className="w-full px-4 py-2 text-center  text-red-600 hover:bg-gray-50 focus:outline-none"
+            className="w-full cursor-pointer px-4 py-2 text-center text-red-600 hover:bg-blue-100 focus:outline-none"
             onClick={() => {
               setOpen(false);
               onLogout();
