@@ -8,6 +8,7 @@ export default function SignupPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
@@ -98,10 +99,16 @@ export default function SignupPage() {
             <div className="order-1 rounded-lg bg-white p-8 shadow-md md:order-2">
               <form
                 className="space-y-4"
-                onSubmit={(e) =>
-                  handleSignupSubmit(username, password, confirmPassword, e)
-                }
-
+                onSubmit={async (e) => {
+                  setLoading(true);
+                  await handleSignupSubmit(
+                    username,
+                    password,
+                    confirmPassword,
+                    e,
+                  );
+                  setLoading(false);
+                }}
               >
                 <div>
                   <label
@@ -197,12 +204,20 @@ export default function SignupPage() {
                 </div> */}
 
                 <div>
-                  <button
-                    type="submit"
-                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >
-                    Create account
-                  </button>
+                                  <button
+                  type="submit"
+                  className="flex w-full justify-center items-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  disabled={loading}
+                >
+                  {loading && (
+                    <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                  )}
+                  {loading ? "Creating Account" : "Create Account"}
+                </button>
+
                 </div>
               </form>
             </div>

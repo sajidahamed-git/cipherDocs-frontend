@@ -81,16 +81,7 @@ export default async function handleSignupSubmit(
     const data = await response.json();
     
     if (response.ok) {
-      // Show success message
-    //   alert(data.message || "User signed up successfully");
-      console.log("Signup successful:", data.user);
-
-      console.log("password", password)
-      
-      // Redirect to login page after successful signup
-      setTimeout(() => {
         window.location.href = "/login";
-      }, 10000);
     } else {
       // Handle error response
       alert(data.message || "Signup failed");
