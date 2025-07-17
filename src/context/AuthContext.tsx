@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL || "https://cipherapi.sajidahamed.com";
 
@@ -12,8 +13,10 @@ const AuthContext = createContext<AuthContextType>({ user: null, loading: true }
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
+    console.log("use effect in the auth provider is running");
     const fetchUser = async () => {
       try {
         const res = await fetch(`${API_URL}/me`, { credentials: "include" });
@@ -27,7 +30,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     };
     fetchUser();
-  }, []);
+  }, [location.pathname]);
 
   return (
     <AuthContext.Provider value={{ user, loading }}>
