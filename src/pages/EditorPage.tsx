@@ -107,7 +107,7 @@ if (!user) {
         </div>
         <UserProfile username={user.username} />
       </div>
-      <div className="flex-grow overflow-y-auto rounded border bg-white">
+      <div className="editor flex-grow overflow-y-auto rounded border bg-white">
         <SimpleEditor
           onEditorReady={(editor) => (editorRef.current = editor)}
         />
