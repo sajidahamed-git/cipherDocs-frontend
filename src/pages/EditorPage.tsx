@@ -13,15 +13,16 @@ export default function EditorPage() {
   const { user } = useAuth();
   const editorRef = useRef<Editor | null>(null);
   const { id } = useParams();
-  // In a real app, you would use the `id` to fetch the document content from your API.
-  // If id is 'new', you'd show a blank editor.
 
   const [title, setTitle] = useState(
     id === "new" ? "Untitled Document" : `${id}`,
   );
 
+  const [saving, setSaving] = useState(false)
+
 
   const handleSave =  async () => {
+    setSaving(true);
     // TODO: Connect to API to save title
     console.log("Saving title:", title);
     if (editorRef.current) {
@@ -42,6 +43,7 @@ export default function EditorPage() {
       });
       if (response.ok) {
         // const data = await response.json();
+        setSaving(false);
         console.log("Document saved successfully:");
       }
       else {
@@ -49,7 +51,6 @@ export default function EditorPage() {
         console.error("Error saving document:", errorData);
       }
 
-      // Here you would typically send the content to your API
     }
   };
 
@@ -102,7 +103,7 @@ if (!user) {
             onClick={handleSave}
             className=" rounded border border-indigo-600 bg-indigo-600 px-4 py-1 font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
           >
-            Save
+            {saving ? "Saving..." : "Save"}
           </button>
         </div>
         <UserProfile username={user.username} />
