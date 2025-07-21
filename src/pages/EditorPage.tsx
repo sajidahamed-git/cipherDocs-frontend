@@ -90,7 +90,7 @@ if (!user) {
   return (
     <div className="flex h-screen flex-col bg-gray-50 p-8">
 
-      <div className="mb-4 flex items-center justify-between gap-6">
+      <div className=" flex pt-1 items-center justify-between gap-6">
         <div className="left flex gap-4 items-center">
           <Home></Home>
           <input
@@ -108,7 +108,7 @@ if (!user) {
         </div>
         <UserProfile username={user.username} />
       </div>
-      <div className="editor flex-grow overflow-y-auto rounded border bg-white">
+      <div className="editor mt-12 flex-grow overflow-y-auto rounded border bg-white">
         <SimpleEditor
           onEditorReady={(editor) => (editorRef.current = editor)}
         />
