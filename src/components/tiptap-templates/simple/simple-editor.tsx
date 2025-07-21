@@ -267,11 +267,11 @@ export function SimpleEditor({ onEditorReady }: { onEditorReady?: (editor: Edito
         )}
       </Toolbar>
 
-      <div className="content-wrapper">
+      <div className="content-wrapper bg-gray-300">
         <EditorContent
           editor={editor}
           role="presentation"
-          className="simple-editor-content"
+          className="simple-editor-content bg-white h-full overflow-y-auto "
         />
       </div>
     </EditorContext.Provider>
