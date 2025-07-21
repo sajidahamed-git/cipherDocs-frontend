@@ -42,7 +42,7 @@ export default function UserProfile({ username }: { username: string }) {
     }
   }
   return (
-    <div className={`relative inline-block`} ref={dropdownRef}>
+    <div className="relative inline-block" ref={dropdownRef}>
       <button
         type="button"
         aria-haspopup="true"
@@ -80,12 +80,12 @@ export default function UserProfile({ username }: { username: string }) {
         </span>
       </button>
       {open && (
-        <div className="animate-fade-in absolute right-0 z-10 mt-2 w-48 rounded-md border border-black bg-white py-2 shadow-lg">
+        <div className="animate-fade-in absolute right-0 z-1000 mt-2 w-48 rounded-md border border-black bg-white py-2 shadow-lg">
           <div className="cursor-pointer border-b border-black px-4 py-2 text-center font-medium text-gray-700 hover:bg-blue-100">
             {username}
           </div>
           <button
-            className="w-full cursor-pointer px-4 py-2 text-center text-red-600 hover:bg-blue-100 focus:outline-none"
+            className="w-full cursor-pointer px-4 py-2 text-center  text-red-600 hover:bg-blue-100 focus:outline-none"
             onClick={() => {
               setOpen(false);
               onLogout();
