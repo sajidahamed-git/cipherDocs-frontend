@@ -11,31 +11,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setError("");
-  //   try {
-  //     const response = await fetch("/login", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ username, password }),
-  //       credentials: "include", // important for cookies/session
-  //     });
-  //     if (response.ok) {
-  //       // Redirect or update UI on successful login
-  //       window.location.href = "/dashboard"; // change as needed
-  //     } else {
-  //       const data = await response.json();
-  //       setError(data.message || "Login failed");
-  //     }
-  //   } catch (err) {
-  //     setError("Network error");
-  //     console.log(err);
-  //   }
-  // };
-
   return (
     <>
       <div>

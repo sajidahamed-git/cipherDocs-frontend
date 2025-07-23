@@ -1,17 +1,18 @@
 //import username types from types.ts
+// import { deriveEncryptionKey, getSaltForUser } from "../utils/crypto/crypto";
 import type { Username, Password } from "../types/types";
 const API_URL =
   import.meta.env.VITE_API_URL || "https://cipherapi.sajidahamed.com";
 
 export default async function handleLoginSubmit(
+
   username: Username,
   Password: Password,
-  e: React.FormEvent<HTMLFormElement>
+  e: React.FormEvent<HTMLFormElement>,
 ) {
   e.preventDefault();
-  
-  // Hash the password for zero-trust architecture
-  
+
+  console.log("handleLoginSubmit called with:", username, Password);
   try {
     const response = await fetch(`${API_URL}/login`, {
       method: "POST",
@@ -21,26 +22,22 @@ export default async function handleLoginSubmit(
       body: JSON.stringify({ username, password: Password }), // Send hashed password
       credentials: "include", // important for cookies/session
     });
-    
+
     const data = await response.json();
     if (!response.ok) {
       // Handle error response
-      console.error("Login failed:", data);
       alert(data.message || "Login failed. Please try again.");
       return;
     }
     // Handle successful login
-    if(response.ok) {
+    if (response.ok) {
       // Redirect or update UI on successful login
+      console.log("login successful");
       window.location.href = "/dashboard"; // change as needed
+      // const salt = getSaltForUser(username);
+      // const encryptionKey = await deriveEncryptionKey(Password, salt);
+      // console.log("Encryption key derived:", encryptionKey);
     }
-    console.log("Login successful:", data);
-
-
-
-    console.log(response.status);
-    console.log("Login response:", data);
-    console.log('response', response);
   } catch (e) {
     console.error("Network error:", e);
     alert("Network error. Please check your connection and try again.");
