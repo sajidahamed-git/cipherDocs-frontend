@@ -1,14 +1,14 @@
 //import username types from types.ts
-// import { deriveEncryptionKey, getSaltForUser } from "../utils/crypto/crypto";
+import { deriveEncryptionKey, getSaltForUser } from "../utils/crypto/crypto";
 import type { Username, Password } from "../types/types";
-const API_URL =
-  import.meta.env.VITE_API_URL || "https://cipherapi.sajidahamed.com";
+const API_URL = import.meta.env.VITE_API_URL || "https://cipherapi.sajidahamed.com";
 
 export default async function handleLoginSubmit(
 
   username: Username,
   Password: Password,
   e: React.FormEvent<HTMLFormElement>,
+  setEncryptionKey: (key: CryptoKey) => void
 ) {
   e.preventDefault();
 
@@ -31,12 +31,13 @@ export default async function handleLoginSubmit(
     }
     // Handle successful login
     if (response.ok) {
-      // Redirect or update UI on successful login
       console.log("login successful");
+      const salt = getSaltForUser(username);
+      const encryptionKey = await deriveEncryptionKey(Password, salt);
+      console.log("Encryption key derived:", encryptionKey.algorithm);
+      setEncryptionKey(encryptionKey); // Save the encryption key in context
+
       window.location.href = "/dashboard"; // change as needed
-      // const salt = getSaltForUser(username);
-      // const encryptionKey = await deriveEncryptionKey(Password, salt);
-      // console.log("Encryption key derived:", encryptionKey);
     }
   } catch (e) {
     console.error("Network error:", e);

@@ -3,6 +3,7 @@ import TopBlur from "../components/TopBlur";
 import BottomBlur from "../components/BottomBlur";
 import { Link } from "react-router-dom";
 // import "./App.css";
+import { useAuth } from "../context/AuthContext"; // Assuming you have an AuthContext
 
 import handleLoginSubmit from "../utils/handleLoginSubmit"; // Assuming you have this utility function
 
@@ -10,7 +11,7 @@ export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const {setEncryptionKey}  = useAuth()
   return (
     <>
       <div>
@@ -31,7 +32,7 @@ export default function LoginPage() {
             <form
               onSubmit={async (e) => {
                 setLoading(true);
-                await handleLoginSubmit(username, password, e);
+                await handleLoginSubmit(username, password, e,setEncryptionKey);
                 setLoading(false);
               }}
               className="space-y-6"

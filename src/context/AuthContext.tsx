@@ -12,7 +12,6 @@ type AuthContextType = {
   setEncryptionKey: (key: CryptoKey) => void;
 };
 
-
 const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
@@ -28,17 +27,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
 
   //Init to avoid ts errors, this will be set later
-  const encryptionKey = null;
-  const setEncryptionKey = (key: CryptoKey) => {
-    console.log("Setting encryption key:", key);
-  };
+
+  const [encryptionKey, setEncryptionKey] = useState<CryptoKey | null>(null);
 
   useEffect(() => {
-      const publicRoutes = ["/login", "/signup", "/"];
-      if (publicRoutes.includes(location.pathname)) {
-        setLoading(false);
-        return;
-      }
+    const publicRoutes = ["/login", "/signup", "/"];
+    if (publicRoutes.includes(location.pathname)) {
+      setLoading(false);
+      return;
+    }
+
     console.log("use effect in the auth provider is running");
     const fetchUser = async () => {
       try {
@@ -56,7 +54,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [location.pathname]);
 
   return (
-    <AuthContext.Provider value={{ user, loading,encryptionKey, setEncryptionKey }}>
+    <AuthContext.Provider
+      value={{ user, loading, encryptionKey, setEncryptionKey }}
+    >
       {children}
     </AuthContext.Provider>
   );
